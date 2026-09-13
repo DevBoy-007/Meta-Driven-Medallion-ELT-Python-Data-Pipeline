@@ -10,28 +10,11 @@ A scalable, configuration-driven, and robust **ELT (Extract, Load, Transform)** 
 
 ## 🏗️ Architecture Overview
 The pipeline processes data through three distinct refinement layers:
-graph LR
-    subgraph Metadata Driven Control
-        Config[Metadata Config <br/> JSON / YAML]
-    end
 
-    Raw[Raw Sources] --> Bronze[Bronze Layer <br/> Raw / Ingest]
-    Bronze --> Silver[Silver Layer <br/> Cleansed & Typed]
-    Silver --> Gold[Gold Layer <br/> Aggregates / Datamarts]
-    Gold --> BI[Analytics & BI Tools]
-
-    Config -.-> Raw
-    Config -.-> Bronze
-    Config -.-> Silver
-    Config -.-> Gold
-
-    style Config fill:#f9f,stroke:#333,stroke-width:2px
-    style Bronze fill:#cd7f32,stroke:#333,stroke-width:1px,color:#fff
-    style Silver fill:#c0c0c0,stroke:#333,stroke-width:1px,color:#000
-    style Gold fill:#ffd700,stroke:#333,stroke-width:1px,color:#000
-
-
-[ Metadata Config (JSON/YAML) ]
+[ Raw Sources ] ──► [ Bronze Layer ] ──► [ Silver Layer ] ──► [ Gold Layer ] ──► [ BI & Analytics ]
+                           ▲
+                           │
+             [ Metadata Config (JSON/YAML) ]
 
 *   **Bronze Layer (Raw):** Ingests raw data source files (CSV, Parquet, APIs, JSON) dynamically based on metadata definitions with minimal transformations, preserving history.
 *   **Silver Layer (Cleansed):** Cleans data, standardizes schemas, handles null values, casts correct data types, and filters out or quarantines corrupted rows.
